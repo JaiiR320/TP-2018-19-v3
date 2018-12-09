@@ -23,7 +23,7 @@ void driveSpeed(double left, double right, int side);
 
 void driveDist(float dist, int speed);
 
-void driveTurn(double degrees, char* side, int speed);
+void driveTurn(int degrees, char* side, int speed);
 
 void liftSet(int pos, int speed);
 

@@ -43,14 +43,22 @@ void driveDist(float dist, int speed){ //IMPORTANT, Distance in Inches
 	right_front.move_relative(dist, speed);
 	right_back.move_relative(dist, speed);
 
-    while (current < target) {
-        current = left_front.get_position();
-        delay(10);
+    if (current > target) {
+        while (current > target) {
+            current = left_front.get_position();
+            delay(10);
+        }
+    }
+    if (current < target) {
+        while (current < target) {
+            current = left_front.get_position();
+            delay(10);
+        }
     }
 }
 
-void driveTurn(double degrees, char* side, int speed){ //Pos degrees turns right
-	double arclength = 2 * 3.1415926 * 7 * (degrees / 360);
+void driveTurn(int degrees, char* side, int speed){ //Pos degrees turns right
+	double arclength = 2 * 3.1415926 * 7 * (double(degrees) / 360);
 
 	double dist = (arclength / 12.566) * 360;
 
@@ -70,9 +78,17 @@ void driveTurn(double degrees, char* side, int speed){ //Pos degrees turns right
 	right_front.move_relative(-dist, speed);
 	right_back.move_relative(-dist, speed);
 
-    while (current < target) {
-        current = left_front.get_position();
-        delay(10);
+    if (current > target) {
+        while (current > target) {
+            current = left_front.get_position();
+            delay(10);
+        }
+    }
+    if (current < target) {
+        while (current < target) {
+            current = left_front.get_position();
+            delay(10);
+        }
     }
 }
 
@@ -82,9 +98,17 @@ void liftSet(int pos, int speed){
 
 	lift_mtr.move_relative(pos, speed);
 
-    while (current < target) {
-        current = lift_mtr.get_position();
-        delay(10);
+    if (current > target) {
+        while (current > target) {
+            current = lift_mtr.get_position();
+            delay(10);
+        }
+    }
+    if (current < target) {
+        while (current < target) {
+            current = lift_mtr.get_position();
+            delay(10);
+        }
     }
 }
 
