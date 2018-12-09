@@ -8,7 +8,7 @@ Motor left_back(2, E_MOTOR_GEARSET_18, false, E_MOTOR_ENCODER_DEGREES);
 Motor right_front(3, E_MOTOR_GEARSET_18, true, E_MOTOR_ENCODER_DEGREES);
 Motor right_back(4, E_MOTOR_GEARSET_18, true, E_MOTOR_ENCODER_DEGREES);
 
-Motor flywheel(8, E_MOTOR_GEARSET_18, true, E_MOTOR_ENCODER_ROTATIONS);
+Motor flywheel_mtr(8, E_MOTOR_GEARSET_18, true, E_MOTOR_ENCODER_ROTATIONS);
 
 Motor intake_mtr(7, E_MOTOR_GEARSET_18, false, E_MOTOR_ENCODER_ROTATIONS);
 
@@ -112,6 +112,21 @@ void liftSet(int pos, int speed){
     }
 }
 
-void flyWheelSet(int velocity){
-	flywheel.move(velocity);
+void flyWheel(int velocity){
+	flywheel_mtr.move(velocity);
+}
+
+void intake(int velocity){
+    intake_mtr.set_velocity(velocity);
+}
+
+void index(int velocity){
+    index_mtr.set_velocity(velocity);
+}
+
+void robotStop(){
+    driveSpeed(0, 0, 1);
+    flyWheel(0);
+    intake(0);
+    index(0);
 }

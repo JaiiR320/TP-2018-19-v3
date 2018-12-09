@@ -42,6 +42,8 @@
 //#include "okapi/api.hpp"
 //#include "pros/api_legacy.h"
 #include "robot.h"
+#include "auton.h"
+#include "display/lvgl.h"
 
 /**
  * If you find doing pros::Motor() to be tedious and you'd prefer just to do

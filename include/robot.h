@@ -12,12 +12,12 @@ extern Motor right_back;
 extern Motor left_front;
 extern Motor right_front;
 
-extern Motor left_lift;
-extern Motor right_lift;
-
 extern Motor flywheel_mtr;
 
 extern Motor intake_mtr;
+extern Motor index_mtr;
+
+extern Motor lift_mtr;
 
 void driveSpeed(double left, double right, int side);
 
@@ -27,6 +27,12 @@ void driveTurn(int degrees, char* side, int speed);
 
 void liftSet(int pos, int speed);
 
-void flyWheelSet(int velocity);
+void flyWheel(int velocity);
+
+void intake(int velocity);
+
+void index(int velocity);
+
+void robotStop();
 
 #endif
