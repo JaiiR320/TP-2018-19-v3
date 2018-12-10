@@ -49,21 +49,12 @@ void driveDist(float dist, int speed){ //IMPORTANT, Distance in Inches
     delay(10);
 }
 
-void driveTurn(int degrees, char* side, int speed){ //Pos degrees turns right
+void driveTurn(int degrees, int side, int speed){ //Pos degrees turns right
 	double arclength = 2 * 3.1415926 * 7 * (double(degrees) / 360);
 
 	double dist = (arclength / 12.566) * 360;
 
-    if (strcmp(side, "left") == 0) {
-        dist *= -1;
-    } else if (strcmp(side, "right") == 0) {
-        dist *= 1;
-    } else {
-        dist = 0;
-    }
-
-    int current = left_front.get_position();
-    int target = current + dist;
+    dist *= side;
 
 	left_front.move_relative(dist, speed);
 	left_back.move_relative(dist, speed);
@@ -76,10 +67,36 @@ void driveTurn(int degrees, char* side, int speed){ //Pos degrees turns right
     delay(10);
 }
 
-void liftSet(int pos, int speed){
-    int current = lift_mtr.get_position();
-    int target = current + pos;
+void driveArc(float true_distance, int side, int exit_angle, int max_speed){
+    exit_angle *= 3.1415926 / 180.0
+    double rad = true_distance / (double)exit_angle
 
+    double arc_left = rad + (side * -7) * exit_angle;
+    double arc_right = rad + (side * 7) * exit_angle;
+
+    int vel_left = max_speed;
+    int vel_right = max_speed;
+
+    if (arc_left < arc_right) {
+        vel_right = (double)max_speed * (arc_left / arc_right);
+    }
+    if (arc_right < arc_left) {
+        vel_left = (double)max_speed * (arc_right / arc_left);
+    }
+
+    int rev = 1;
+
+    if (true_distance < 0) {
+        rev = -1;
+    }
+
+    left_front.move_relative(left_arc * rev, vel_left);
+	left_back.move_relative(left_arc * rev, vel_left);
+	right_front.move_relative(right_arc * rev, vel_right);
+	right_back.move_relative(right_arc * rev, vel_right);
+}
+
+void liftSet(int pos, int speed){
 	lift_mtr.move_relative(pos, speed);
 
     while (lift_mtr.is_stopped() == 0) {

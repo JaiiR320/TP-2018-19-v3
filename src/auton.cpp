@@ -11,7 +11,7 @@ void mainAuton(int side){
     driveDist(39, 200); // to cap
     driveDist(-36, 200); // back up
 
-    driveTurn(side * 90); // turn towards flags
+    driveTurn(90, side, 100); // turn towards flags
     driveDist(4, 100); // aim for top flag
 
     intake(200);
@@ -30,19 +30,19 @@ void mainAuton(int side){
     index(0);
 
     driveDist(32, 100); // drive into bottom flag
-    driveTurn(side * -50, 100);
+    driveTurn(-50, side, 100); // turn into bottom
     driveDist(6, 100);
     driveDist(-6, 100);
-    driveTurn(side * 50, 100);
+    driveTurn(50, side, 100); // turn out
 
     driveDist(-42, 200);
-    driveTurn(side * -105, 150); // turn into second cap
+    driveTurn(-105, side, 150); // turn into second cap
 
     intake(-200);
     driveDist(24, 50); // flip cap
     driveDist(-12, 200);
 
-    driveTurn(side * 45, 200); // drive into low flag
+    driveTurn(45, side, 200); // drive into low flag
     driveDist(30, 200);
 
     robotStop();
