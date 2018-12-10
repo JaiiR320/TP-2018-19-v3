@@ -1,12 +1,9 @@
 #include "main.h"
 
 void autonomous() {
-    switch (Aauton) {
-      case 1: mainAuton(Acolor);
-      case 2: secondAuton(Acolor);
-      case 3: safeAuton(Acolor);
-    }
-    while (1){
-        delay(10);
-    }
+  switch (Aauton) {
+    case 1: mainAuton(Acolor);
+    case 2: secondAuton(Acolor);
+    case 3: safeAuton(Acolor);
+  }
 }

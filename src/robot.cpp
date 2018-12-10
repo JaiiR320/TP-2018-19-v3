@@ -16,7 +16,6 @@ Motor index_mtr(9, E_MOTOR_GEARSET_18, false, E_MOTOR_ENCODER_DEGREES);
 
 Motor lift_mtr(10, E_MOTOR_GEARSET_18, false, E_MOTOR_ENCODER_ROTATIONS);
 
-
 void driveSpeed(double left, double right, int side){
 	if(side == 1){
 		left_front.move(left);
@@ -35,18 +34,18 @@ void driveSpeed(double left, double right, int side){
 void driveDist(float dist, int speed){ //IMPORTANT, Distance in Inches
 	dist = ((dist / 12.566) * 360);    //Converts desired inches into degrees
 
-    int current = left_front.get_position();
-    int target = current + dist;
-
 	left_front.move_relative(dist, speed);
 	left_back.move_relative(dist, speed);
 	right_front.move_relative(dist, speed);
 	right_back.move_relative(dist, speed);
 
-    while (left_front.is_stopped() == 0) {
-        delay(10);
-    }
+	int target = dist;
+	int current = left_front.get_position();
+
+	while (current != target) {
+		current = left_front.get_position();
     delay(10);
+  }
 }
 
 void driveTurn(int degrees, int side, int speed){ //Pos degrees turns right
@@ -54,55 +53,80 @@ void driveTurn(int degrees, int side, int speed){ //Pos degrees turns right
 
 	double dist = (arclength / 12.566) * 360;
 
-    dist *= side;
+  dist *= side;
 
 	left_front.move_relative(dist, speed);
 	left_back.move_relative(dist, speed);
 	right_front.move_relative(-dist, speed);
 	right_back.move_relative(-dist, speed);
 
-    while (left_front.is_stopped() == 0) {
-        delay(10);
-    }
+	int target = dist;
+	int current = left_front.get_position();
+
+	while (current != target) {
+		current = left_front.get_position();
     delay(10);
+  }
 }
 
 void driveArc(float true_distance, int side, int exit_angle, int max_speed){
-    exit_angle *= 3.1415926 / 180.0
-    double rad = true_distance / (double)exit_angle
+  exit_angle *= 3.1415926 / 180.0;
+  double rad = true_distance / (double)exit_angle;
 
-    double arc_left = rad + (side * -7) * exit_angle;
-    double arc_right = rad + (side * 7) * exit_angle;
+  double arc_left = (rad + (side * 7)) * exit_angle;
+  double arc_right = (rad + (side * -7)) * exit_angle;
 
-    int vel_left = max_speed;
-    int vel_right = max_speed;
+	arc_left = (arc_left / 12.566) * 360;
+	arc_right = (arc_right / 12.566) * 360;
 
-    if (arc_left < arc_right) {
-        vel_right = (double)max_speed * (arc_left / arc_right);
-    }
-    if (arc_right < arc_left) {
-        vel_left = (double)max_speed * (arc_right / arc_left);
-    }
+  int vel_left = max_speed;
+  int vel_right = max_speed;
 
-    int rev = 1;
+  if (arc_left < arc_right) {
+    vel_left = (double)max_speed * (arc_left / arc_right);
+  }
+  if (arc_right < arc_left) {
+    vel_right = (double)max_speed * (arc_right / arc_left);
+  }
 
-    if (true_distance < 0) {
-        rev = -1;
-    }
+  int rev = 1;
 
-    left_front.move_relative(left_arc * rev, vel_left);
-	left_back.move_relative(left_arc * rev, vel_left);
-	right_front.move_relative(right_arc * rev, vel_right);
-	right_back.move_relative(right_arc * rev, vel_right);
+  if (true_distance < 0) {
+    rev = -1;
+  }
+	arc_left *= rev;
+	arc_right *= rev;
+
+	std::cout << "Left Arc:  " << arc_left << '\n';
+	std::cout << "Right Arc: " << arc_right << '\n';
+
+	std::cout << "Left Vel:  " << vel_left << '\n';
+	std::cout << "Right Vel: " << vel_right << '\n';
+
+  left_front.move_relative(arc_left, vel_left);
+	left_back.move_relative(arc_left, vel_left);
+	right_front.move_relative(arc_right, vel_right);
+	right_back.move_relative(arc_right, vel_right);
+
+	int target = arc_left;
+	int current = left_front.get_position();
+
+	while (current != target) {
+		current = left_front.get_position();
+    delay(10);
+  }
 }
 
 void liftSet(int pos, int speed){
 	lift_mtr.move_relative(pos, speed);
 
-    while (lift_mtr.is_stopped() == 0) {
-        delay(10);
-    }
+	int target = pos;
+	int current = left_front.get_position();
+
+	while (current != target) {
+		current = left_front.get_position();
     delay(10);
+  }
 }
 
 void flyWheel(int velocity){
@@ -110,16 +134,15 @@ void flyWheel(int velocity){
 }
 
 void intake(int velocity){
-    intake_mtr.set_velocity(velocity);
+  intake_mtr.move_velocity(velocity);
 }
 
 void index(int velocity){
-    index_mtr.set_velocity(velocity);
+  index_mtr.move_velocity(velocity);
 }
 
 void robotStop(){
-    driveSpeed(0, 0, 1);
-    flyWheel(0);
-    intake(0);
-    index(0);
+  flyWheel(0);
+  intake(0);
+  index(0);
 }

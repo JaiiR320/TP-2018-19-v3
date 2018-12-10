@@ -28,10 +28,10 @@ static lv_res_t col_sel(lv_obj_t * colorBTNS, const char *txt){
 	} else if (strcmp(txt, "Blue") == 0){
 		Acolor = 1;
 	}	else {
-		Acolor = 1;
+		Acolor = -1;
 	}
 
-    return LV_RES_OK; /*Return OK because the button matrix is not deleted*/
+  return LV_RES_OK; /*Return OK because the button matrix is not deleted*/
 }
 
 static lv_res_t duo_sel(lv_obj_t * duoBTNS, const char *txt){

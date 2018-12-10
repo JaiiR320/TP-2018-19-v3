@@ -20,9 +20,9 @@ void opcontrol() {
 
         //flywheel
         if (master.get_digital(DIGITAL_Y) == 1) {
-            flyWheelSet(200);
+            flyWheel(200);
         } else if (master.get_digital(DIGITAL_B) == 1) {
-            flyWheelSet(0);
+            flyWheel(0);
         }
         master.print(0, 0, "Flywheel Vel: %d", flywheel_mtr.get_actual_velocity());
 
@@ -64,9 +64,9 @@ void opcontrol() {
 
         //flywheel
         if (master.get_digital(DIGITAL_Y) == 1) {
-            flyWheelSet(200);
+            flyWheel(200);
         } else if (master.get_digital(DIGITAL_B) == 1) {
-            flyWheelSet(0);
+            flyWheel(0);
         }
         master.print(0, 0, "Flywheel Vel: %d", flywheel_mtr.get_actual_velocity());
 
