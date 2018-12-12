@@ -1,31 +1,93 @@
 #include "main.h"
 
-/**
- * Runs the operator control code. This function will be started in its own task
- * with the default priority and stack size whenever the robot is enabled via
- * the Field Management System or the VEX Competition Switch in the operator
- * control mode.
- *
- * If no competition control is connected, this function will run immediately
- * following initialize().
- *
- * If the robot is disabled or communications is lost, the
- * operator control task will be stopped. Re-enabling the robot will restart the
- * task, not resume it from where it left off.
- */
 void opcontrol() {
-	pros::Controller master(pros::E_CONTROLLER_MASTER);
-	pros::Motor left_mtr(1);
-	pros::Motor right_mtr(2);
-	while (true) {
-		pros::lcd::print(0, "%d %d %d", (pros::lcd::read_buttons() & LCD_BTN_LEFT) >> 2,
-		                 (pros::lcd::read_buttons() & LCD_BTN_CENTER) >> 1,
-		                 (pros::lcd::read_buttons() & LCD_BTN_RIGHT) >> 0);
-		int left = master.get_analog(ANALOG_LEFT_Y);
-		int right = master.get_analog(ANALOG_RIGHT_Y);
+    int left, right;
+    int side;
+    //duo
+    while (duo == true) {
+        //side selection
+        if (partner.get_digital(DIGITAL_UP) == 1) {
+            side = 1;
+        } else if (partner.get_digital(DIGITAL_DOWN) == 1) {
+            side = -1;
+        }
 
-		left_mtr = left;
-		right_mtr = right;
-		pros::delay(20);
-	}
+        //drive
+        left = partner.get_analog(E_CONTROLLER_ANALOG_LEFT_Y);
+        right = partner.get_analog(E_CONTROLLER_ANALOG_RIGHT_Y);
+
+        driveSpeed(left, right, side);
+
+        //flywheel
+        if (master.get_digital(DIGITAL_Y) == 1) {
+            flyWheel(200);
+        } else if (master.get_digital(DIGITAL_B) == 1) {
+            flyWheel(0);
+        }
+        master.print(0, 0, "Flywheel Vel: %d", flywheel_mtr.get_actual_velocity());
+
+        //intake
+		if (master.get_digital(DIGITAL_L1) == true) {
+			intake_mtr.move_velocity(200);
+		} else if (master.get_digital(DIGITAL_L2) == true) {
+			intake_mtr.move_velocity(-200);
+		} else {
+			intake_mtr.move_velocity(0);
+		}
+
+	    //index
+	    if (master.get_digital(DIGITAL_R1) == true) {
+			index_mtr.move_velocity(200);
+		} else if (master.get_digital(DIGITAL_R2) == true) {
+			index_mtr.move_velocity(-200);
+		} else {
+			index_mtr.move_velocity(0);
+		}
+
+        delay(20);
+    }
+
+    //solo
+    while (duo == false) {
+        //side selection
+        if (master.get_digital(DIGITAL_UP) == 1) {
+            side = 1;
+        } else if (master.get_digital(DIGITAL_DOWN) == 1) {
+            side = -1;
+        }
+
+        //drive
+        left = master.get_analog(E_CONTROLLER_ANALOG_LEFT_Y);
+        right = master.get_analog(E_CONTROLLER_ANALOG_RIGHT_Y);
+
+        driveSpeed(left, right, side);
+
+        //flywheel
+        if (master.get_digital(DIGITAL_Y) == 1) {
+            flyWheel(200);
+        } else if (master.get_digital(DIGITAL_B) == 1) {
+            flyWheel(0);
+        }
+        master.print(0, 0, "Flywheel Vel: %d", flywheel_mtr.get_actual_velocity());
+
+        //intake
+		if (master.get_digital(DIGITAL_L1) == true) {
+			intake_mtr.move_velocity(200);
+		} else if (master.get_digital(DIGITAL_L2) == true) {
+			intake_mtr.move_velocity(-200);
+		} else {
+			intake_mtr.move_velocity(0);
+		}
+
+	    //index
+	    if (master.get_digital(DIGITAL_R1) == true) {
+			index_mtr.move_velocity(200);
+		} else if (master.get_digital(DIGITAL_R2) == true) {
+			index_mtr.move_velocity(-200);
+		} else {
+			index_mtr.move_velocity(0);
+		}
+
+        delay(20);
+    }
 }

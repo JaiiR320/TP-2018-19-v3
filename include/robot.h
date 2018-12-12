@@ -21,11 +21,13 @@ extern Motor lift_mtr;
 
 void driveSpeed(double left, double right, int side);
 
+void drivePDistance(double distance, double speed);
+
 void driveDist(float dist, int speed);
 
 void driveTurn(int degrees, int side, int speed);
 
-void driveArc(float true_distance, int side, int exit_angle, int max_speed);
+void driveArc(float radius, double exit_angle, int side, int max_speed);
 
 void liftSet(int pos, int speed);
 
