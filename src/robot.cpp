@@ -31,15 +31,18 @@ void driveSpeed(double left, double right, int side){
 	}
 }
 
-void drivePDistance(double distance, double speed){
+void drivePDist(double distance){
 	double kp = 1;
-	double minSpeed = 1;
+	double minSpeed = 5;
 	double current;
 	double outcome;
 
-	while(left_back.is_stopped() == 0 && right_back.is_stopped() == 0){
+	double target = (distance / 12.566) * 360;
+
+	while(outcome > 5){
 		current = left_back.get_position();
-		outcome = kp * (distance - current);
+		outcome = kp * (target - current);
+		std::cout << "outcome: " << outcome << "\n";
 
 		left_front.move(outcome + minSpeed);
 		left_back.move(outcome + minSpeed);
@@ -137,7 +140,7 @@ void index(int velocity){
   index_mtr.move_velocity(velocity);
 }
 
-void robotStop(){
+void robotStop(){ //stops robot
   flyWheel(0);
   intake(0);
   index(0);

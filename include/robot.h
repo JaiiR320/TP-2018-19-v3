@@ -21,7 +21,7 @@ extern Motor lift_mtr;
 
 void driveSpeed(double left, double right, int side);
 
-void drivePDistance(double distance, double speed);
+void drivePDist(double distance);
 
 void driveDist(float dist, int speed);
 
