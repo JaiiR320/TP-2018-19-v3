@@ -43,6 +43,7 @@
 //#include "pros/api_legacy.h"
 #include "robot.h"
 #include "auton.h"
+#include "pidmove.h"
 #include "display/lvgl.h"
 
 /**
