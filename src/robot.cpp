@@ -105,7 +105,7 @@ void driveArc(float radius, double exit_angle, int side, int max_speed){
 }
 
 void liftSet(int pos, int speed){
-	lift_mtr.move_relative(pos, speed);
+	lift_mtr.move_relative(pos, speed);\
 	delay(500);
 	while (lift_mtr.is_stopped() == 0) {
 		delay(10);
