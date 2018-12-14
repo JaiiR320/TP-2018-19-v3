@@ -85,6 +85,9 @@ void opcontrol() {
 		} else {
 			index_mtr.move_velocity(0);
 		}
+
+    //lift set
+
     delay(20);
   }
 }
