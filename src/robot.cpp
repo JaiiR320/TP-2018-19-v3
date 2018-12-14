@@ -31,23 +31,6 @@ void driveSpeed(double left, double right, int side){
 	}
 }
 
-void drivePDistance(double distance, double speed){
-	double kp = 1;
-	double minSpeed = 1;
-	double current;
-	double outcome;
-
-	while(left_back.is_stopped() == 0 && right_back.is_stopped() == 0){
-		current = left_back.get_position();
-		outcome = kp * (distance - current);
-
-		left_front.move(outcome + minSpeed);
-		left_back.move(outcome + minSpeed);
-		right_front.move(-(outcome + minSpeed));
-		right_back.move(-(outcome + minSpeed));
-	}
-}
-
 void driveDist(float dist, int speed){ //IMPORTANT, Distance in Inches
 	dist = ((dist / 12.566) * 360);    //Converts desired inches into degrees
 
@@ -123,6 +106,11 @@ void driveArc(float radius, double exit_angle, int side, int max_speed){
 
 void liftSet(int pos, int speed){
 	lift_mtr.move_relative(pos, speed);
+	delay(500);
+	while (lift_mtr.is_stopped() == 0) {
+		delay(10);
+	}
+	delay(100);
 }
 
 void flyWheel(int velocity){
@@ -138,6 +126,7 @@ void index(int velocity){
 }
 
 void robotStop(){
+	driveSpeed(0, 0, 1);
   flyWheel(0);
   intake(0);
   index(0);
