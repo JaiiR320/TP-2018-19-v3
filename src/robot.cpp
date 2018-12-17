@@ -43,7 +43,7 @@ void driveDist(float dist, int speed){ //IMPORTANT, Distance in Inches
 	while (left_back.is_stopped() == 0 && right_back.is_stopped() == 0) {
 		delay(10);
 	}
-	delay(100);
+	delay(500);
 }
 
 void driveTurn(int degrees, int side, int speed){ //Pos degrees turns right
@@ -62,7 +62,7 @@ void driveTurn(int degrees, int side, int speed){ //Pos degrees turns right
 	while (left_back.is_stopped() == 0 && right_back.is_stopped() == 0) {
 		delay(10);
 	}
-	delay(100);
+	delay(500);
 }
 
 void driveArc(float radius, double exit_angle, int side, int max_speed){
@@ -101,7 +101,7 @@ void driveArc(float radius, double exit_angle, int side, int max_speed){
 	while (left_back.is_stopped() == 0 && right_back.is_stopped() == 0) {
 		delay(10);
 	}
-	delay(100);
+	delay(500);
 }
 
 void liftSet(int pos, int speed){
@@ -110,7 +110,7 @@ void liftSet(int pos, int speed){
 	while (lift_mtr.is_stopped() == 0) {
 		delay(10);
 	}
-	delay(100);
+	delay(500);
 }
 
 void flyWheel(int velocity){

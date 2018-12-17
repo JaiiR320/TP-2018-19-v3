@@ -58,7 +58,8 @@ void secondAuton(int side){
 }
 
 void safeAuton(int side){
-  
+  driveDist(48.0, 150);
+  driveTurn(90, side, 150);
 
   robotStop();
 }
