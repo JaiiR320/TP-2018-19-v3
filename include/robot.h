@@ -19,6 +19,8 @@ extern Motor index_mtr;
 
 extern Motor lift_mtr;
 
+void drivePPos(double left, double right);
+
 void driveSpeed(double left, double right, int side);
 
 void driveDist(float dist, int speed);

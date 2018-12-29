@@ -3,6 +3,8 @@
 void opcontrol() {
   int left, right;
   int side;
+  lift_mtr.set_brake_mode(E_MOTOR_BRAKE_HOLD);
+  lift_mtr.tare_position();
   //duo
   while (duo == true) {
     //side selection
@@ -44,12 +46,11 @@ void opcontrol() {
 		}
 
     //lift
-    if (master.get_digital(DIGITAL_LEFT) == 1) {
-      lift_mtr.move(80);
-    } else if (master.get_digital(DIGITAL_RIGHT) == 1) {
-      lift_mtr.move(-80);
+    if (master.get_digital(DIGITAL_R1) == 1) {
+      lift_mtr.move_absolute(2.5, 100);
+    } else if (master.get_digital(DIGITAL_R2) == 1) {
+      lift_mtr.move_absolute(.8, 100);
     } else {
-      lift_mtr.move(0);
       lift_mtr.move_absolute(0, 100);
     }
 
@@ -65,7 +66,7 @@ void opcontrol() {
       side = -1;
     }
 
-    //drive
+    //drive - arcade
     left = master.get_analog(E_CONTROLLER_ANALOG_LEFT_Y);
     right = master.get_analog(E_CONTROLLER_ANALOG_RIGHT_Y);
 
@@ -97,14 +98,15 @@ void opcontrol() {
 		}
 
     //lift
-    if (master.get_digital(DIGITAL_LEFT) == 1) {
-      lift_mtr.move(80);
-    } else if (master.get_digital(DIGITAL_RIGHT) == 1) {
-      lift_mtr.move(-80);
+    if (master.get_digital(DIGITAL_R1) == 1) {
+      lift_mtr.move_absolute(2.5, 100);
+    } else if (master.get_digital(DIGITAL_R2) == 1) {
+      lift_mtr.move_absolute(.8, 100);
     } else {
-      lift_mtr.move(0);
       lift_mtr.move_absolute(0, 100);
     }
+
+    std::cout << "Lift Pos: " << lift_mtr.get_position() << '\n';
 
     delay(20);
   }

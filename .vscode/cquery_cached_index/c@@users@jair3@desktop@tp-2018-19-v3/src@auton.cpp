@@ -1,26 +1,26 @@
 #include "main.h"
 
-int Acolor = 1;
-int Aauton = 1;
+int Acolor = 2;
+int Aauton = 2;
 
 void mainAuton(int side){
   //3 flags + 2 caps
   flyWheel(200);
   intake(200);
 
-  driveDist(39, 200); // to cap
+  driveDist(39, 140); // to cap
   delay(500);
-  driveDist(-36, 200); // back up
+  driveDist(-36, 140); // back up
 
-  driveTurn(90, side, 100); // turn towards flags
-  driveDist(4, 100); // aim for top flag
+  driveTurn(90, side, 75); // turn towards flags
+  driveDist(-4, 100);
 
   intake(200);
   index(200); // shoot
   delay(400);
   index(0);
 
-  driveDist(21, 100); // aim for middle flag
+  driveDist(20, 100); // aim for middle flag
 
   intake(200);
   index(200); // shoot
@@ -35,6 +35,7 @@ void mainAuton(int side){
   driveDist(6, 100);
   driveDist(-6, 100);
   driveTurn(50, side, 100); // turn out
+  delay(1000);
 
   driveDist(-42, 200);
   driveTurn(-105, side, 150); // turn into second cap
@@ -50,16 +51,9 @@ void mainAuton(int side){
 }
 
 void secondAuton(int side){
-  // cap, 2 high flags, cap on pole, park (brian auton)
-  flyWheel(200);
-  intake(200);
-
-  driveDist(39, 200); // to cap
+  drivePPos(24.0, 24.0);
 }
 
 void safeAuton(int side){
-  driveDist(48.0, 150);
-  driveTurn(90, side, 150);
 
-  robotStop();
 }

@@ -28,11 +28,11 @@
             "-fdiagnostics-color",
             "--std=gnu++17",
             "-o",
-            "bin/robot.cpp.o",
-            "src\\robot.cpp"
+            "bin/opcontrol.cpp.o",
+            "src\\opcontrol.cpp"
         ],
         "directory": "C:\\Users\\jair3\\Desktop\\TP-2018-19-v3",
-        "file": "src\\robot.cpp"
+        "file": "src\\opcontrol.cpp"
     },
     {
         "arguments": [
@@ -98,10 +98,10 @@
             "-fdiagnostics-color",
             "--std=gnu++17",
             "-o",
-            "bin/opcontrol.cpp.o",
-            "src\\opcontrol.cpp"
+            "bin/robot.cpp.o",
+            "src\\robot.cpp"
         ],
         "directory": "C:\\Users\\jair3\\Desktop\\TP-2018-19-v3",
-        "file": "src\\opcontrol.cpp"
+        "file": "src\\robot.cpp"
     }
 ]
