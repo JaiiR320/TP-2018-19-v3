@@ -3,8 +3,6 @@
 void opcontrol() {
   int left, right;
   int side;
-  lift_mtr.set_brake_mode(E_MOTOR_BRAKE_HOLD);
-  lift_mtr.tare_position();
   //duo
   while (duo == true) {
     //side selection
