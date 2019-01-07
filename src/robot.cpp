@@ -31,14 +31,10 @@ void driveSpeed(double left, double right, int side){
 	}
 }
 
-void driveDist(float dist, int speed){ //IMPORTANT, Distance in Inches
+void driveDist(double dist, int speed){ //IMPORTANT, Distance in Inches
 	dist = ((dist / 12.566) * 360);    //Converts desired inches into degrees
 
-	int side;
-	if(dist > 0){side = 1;}
-	else if(dist < 0){side = -1;}
-
-	drivePPos(dist, dist, speed);
+	drivePIDPos(dist, dist, speed);
 }
 
 void driveTurn(int degrees, int side, int speed){ //Pos degrees turns right
@@ -54,7 +50,7 @@ void driveTurn(int degrees, int side, int speed){ //Pos degrees turns right
 	right_front.move_relative(-dist, speed);
 }
 
-void driveArc(float radius, double exit_angle, int side, int max_speed){
+void driveArc(double radius, double exit_angle, int side, int max_speed){
 	exit_angle *= 3.1415926 / 180.0; //1.5 for 90 deg
 	//48 r arc left = 64.40
   double arc_left = (radius + (side * 7.325)) * exit_angle;
@@ -78,7 +74,7 @@ void liftSet(char *pos){
 	int speed = 125;
 	double set;
 	if(strcmp(pos, "hold") == 0){
-		set = 1;
+		set = .8;
 	} else if (strcmp(pos, "up") == 0){
 		set = 2.5;
 	} else if (strcmp(pos, "down") == 0){
@@ -105,4 +101,5 @@ void robotStop(){
   flyWheel(0);
   intake(0);
   index(0);
+	while(1){delay(10);}
 }

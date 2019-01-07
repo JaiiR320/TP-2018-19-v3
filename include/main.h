@@ -61,8 +61,9 @@ using namespace pros;
 /*
 PID FUNCTION PROTOTYPE
 */
-void drivePPos(double Ltarget, double Rtarget, double max_speed);
+void drivePIDPos(double Ltarget, double Rtarget, double max_speed);
 
+void drivePPos(double Ltarget, double Rtarget, double max_speed);
 
 /**
  * Prototypes for the competition control tasks are redefined here to ensure

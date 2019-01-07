@@ -8,11 +8,12 @@ void mainAuton(int side){
   flyWheel(200);
   intake(200);
 
-  driveDist(39, 140); // to cap
+  driveDist(39.0, 140); // to cap
   delay(500);
-  driveDist(-36, 140); // back up
+  driveDist(-36.0, 140); // back up
 
   driveTurn(90, side, 75); // turn towards flags
+  delay(800);
   driveDist(-4, 100);
 
   intake(200);
@@ -51,9 +52,9 @@ void mainAuton(int side){
 }
 
 void secondAuton(int side){
-  drivePPos(24.0, 24.0);
+  delay(400);
+  driveDist(48, 200);
 }
 
 void safeAuton(int side){
-
 }

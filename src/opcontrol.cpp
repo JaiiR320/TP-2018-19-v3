@@ -3,6 +3,7 @@
 void opcontrol() {
   int left, right;
   int side;
+  lift_mtr.tare_position();
   //duo
   while (duo == true) {
     //side selection

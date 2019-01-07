@@ -23,7 +23,7 @@ void drivePPos(double left, double right);
 
 void driveSpeed(double left, double right, int side);
 
-void driveDist(float dist, int speed);
+void driveDist(double dist, int speed);
 
 void driveTurn(int degrees, int side, int speed);
 
