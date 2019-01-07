@@ -55,7 +55,15 @@
  */
 using namespace pros;
 // using namespace pros::literals;
-// using namespace okapi;
+// using namespace okapi;#ifndef PID_H
+
+
+/*
+PID FUNCTION PROTOTYPE
+*/
+void drivePIDPos(double Ltarget, double Rtarget, double max_speed);
+
+void drivePPos(double Ltarget, double Rtarget, double max_speed);
 
 /**
  * Prototypes for the competition control tasks are redefined here to ensure
