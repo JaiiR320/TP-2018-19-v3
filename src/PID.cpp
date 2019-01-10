@@ -1,8 +1,8 @@
 #include "main.h"
 
 void drivePIDPos(double Ltarget, double Rtarget, double max_speed){
-	double kp = .34; // with only p, .25 is perfect
-	double ki = .10;
+	double kp = .28; // with only p, .25 is perfect
+	double ki = .15;
 	double kd = .20;
 
 	//error variables
@@ -24,7 +24,7 @@ void drivePIDPos(double Ltarget, double Rtarget, double max_speed){
 	//window for integral term to take effect
 	double ki_limit = 10;
 
-	int stop_count = 0;
+	double THRESH = 3;
 
 	bool pidRunning = true;
 
@@ -33,7 +33,7 @@ void drivePIDPos(double Ltarget, double Rtarget, double max_speed){
 	right_front.tare_position();
 	right_back.tare_position();
 
-	while(1){
+	while(pidRunning){
 		/*~~~~~~~~~~~~~
 		CALCULATE ERROR
 		~~~~~~~~~~~~~*/
@@ -83,6 +83,9 @@ void drivePIDPos(double Ltarget, double Rtarget, double max_speed){
 		/*~~~~~~~~~~~~~
 		SETTING OUTPUTS
 		~~~~~~~~~~~~~*/
+		if(Rspeed > 0) Rspeed -= 5;
+		if(Rspeed < 0) Rspeed += 5;
+
 		left_front.move(Lspeed);
 		left_back.move(Lspeed);
 		right_front.move(Rspeed);
@@ -91,89 +94,17 @@ void drivePIDPos(double Ltarget, double Rtarget, double max_speed){
 		/*~~~~~~~~~
 		CHECK ERROR
 		~~~~~~~~~*/
-		if ((Rerror < 8 && Rerror > -8) && (Lerror < 8 && Lerror > -8)) {
-			stop_count++;
+		if (Lderivative == 0) {
+			pidRunning = false;
 		}
-		if(stop_count == 10){pidRunning = false;}
 
-		std::cout << "P: " << (Lerror * kp) << '\n';
-		std::cout << "I: " << (Lintegral * ki) << '\n';
-		std::cout << "D: " << (Lderivative * kd) << '\n';
-		std::cout << "Output: " << Lspeed << '\n';
-		std::cout << "Error: " << Lerror << '\n';
+		std::cout << "Running" << '\n';
 
 		//50 Hz
 		delay(25);
 	}
-}
-
-void drivePPos(double Ltarget, double Rtarget, double max_speed){
-	double kp = .32; // with only p, .25 is perfect
-
-	double Lerror = Ltarget;
-	double Rerror = Rtarget;
-
-	double Lspeed = 0;
-	double Rspeed = 0;
-	double min_speed = max_speed * -1;
-
-	bool pidRunning = true;
-
-	left_front.tare_position();
-	left_back.tare_position();
-	right_front.tare_position();
-	right_back.tare_position();
-
-	while(1){
-		Lerror = Ltarget - left_back.get_position();
-		Rerror = Rtarget - right_back.get_position();
-
-		Lspeed = (Lerror * kp);
-		Rspeed = (Rerror * kp);
-
-		if(Lspeed > 0){
-			Lspeed += 5;
-		} else if(Lspeed < 0){
-			Lspeed += -5;
-		}
-		if(Rspeed > 0){
-			Rspeed += 5;
-		} else if(Rspeed < 0){
-			Rspeed += -5;
-		}
-
-		/*~~~~~~~~~~~~~~
-		lIMITING OUTPUTS
-		~~~~~~~~~~~~~~*/
-		if (Lspeed > max_speed) {
-			Lspeed = max_speed;
-		} else if (Lspeed < min_speed) {
-			Lspeed = min_speed;
-		}
-
-		if (Rspeed > max_speed) {
-			Rspeed = max_speed;
-		} else if (Rspeed < min_speed) {
-			Rspeed = min_speed;
-		}
-
-		/*~~~~~~~~~~~~~
-		SETTING OUTPUTS
-		~~~~~~~~~~~~~*/
-		left_front.move(Lspeed);
-		left_back.move(Lspeed);
-		right_front.move(Rspeed);
-		right_back.move(Rspeed);
-
-		//if ((Rerror < 8 && Rerror > -8) && (Lerror < 8 && Lerror > -8)) {pidRunning = false;}
-
-		std::cout << "P: " << (Lerror * kp) << '\n';
-		std::cout << "Output: " << Lspeed << '\n';
-		std::cout << "Target: " << Ltarget << '\n';
-		std::cout << "Error: " << Lerror << '\n';
-		std::cout << "" << '\n';
-
-		//50 hz
-		delay(25);
-	}
+	left_front.move(0);
+	left_back.move(0);
+	right_front.move(0);
+	right_back.move(0);
 }

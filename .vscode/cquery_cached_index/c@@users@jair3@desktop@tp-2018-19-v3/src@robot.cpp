@@ -67,7 +67,7 @@ void driveArc(double radius, double exit_angle, int side, int max_speed){
 	arc_left *= rev;
 	arc_right *= rev;
 
-	drivePPos(arc_left, arc_right, max_speed);
+	drivePIDPos(arc_left, arc_right, max_speed);
 }
 
 void liftSet(char *pos){

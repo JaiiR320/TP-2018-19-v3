@@ -63,8 +63,6 @@ PID FUNCTION PROTOTYPE
 */
 void drivePIDPos(double Ltarget, double Rtarget, double max_speed);
 
-void drivePPos(double Ltarget, double Rtarget, double max_speed);
-
 /**
  * Prototypes for the competition control tasks are redefined here to ensure
  * that they can be called from user code (i.e. calling autonomous from a

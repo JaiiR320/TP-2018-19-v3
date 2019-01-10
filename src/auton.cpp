@@ -6,54 +6,54 @@ int Aauton = 2;
 void mainAuton(int side){
   //3 flags + 2 caps
   flyWheel(200);
+  delay(250);
   intake(200);
 
-  driveDist(39.0, 140); // to cap
-  delay(500);
-  driveDist(-36.0, 140); // back up
+  driveDist(38.0, 125); // to cap
+  delay(400);
+  driveDist(-35.0, 125); // back up
 
   driveTurn(90, side, 75); // turn towards flags
   delay(800);
-  driveDist(-4, 100);
+  driveDist(-5, 120); // back up
 
-  intake(200);
-  index(200); // shoot
-  delay(400);
-  index(0);
-
-  driveDist(20, 100); // aim for middle flag
-
-  intake(200);
+  delay(800);
+  intake(0);
   index(200); // shoot
   delay(700);
+  index(0);
+
+  driveDist(28, 100); // aim for middle flag
+
+  intake(200);
+  index(200); // shoot
+  delay(800);
 
   flyWheel(0); // stop shooting devices
   intake(0);
   index(0);
 
-  driveDist(32, 100); // drive into bottom flag
-  driveTurn(-50, side, 100); // turn into bottom
-  driveDist(6, 100);
-  driveDist(-6, 100);
-  driveTurn(50, side, 100); // turn out
-  delay(1000);
+  driveTurn(25, side, 100);
+  delay(600);
+  driveDist(18, 140); // turn into bottom flag and push then back up
+  driveDist(-18, 140);
 
-  driveDist(-42, 200);
-  driveTurn(-105, side, 150); // turn into second cap
+  driveTurn(-135, side, 100); // turn into cap
+  delay(800);
 
   intake(-200);
-  driveDist(24, 50); // flip cap
-  driveDist(-12, 200);
+  driveDist(18, 100); // flip cap
 
-  driveTurn(45, side, 200); // drive into low flag
-  driveDist(30, 200);
+  driveTurn(55, side, 200);
+  delay(800);
+  driveDist(32, 200);
+  driveTurn(-100, side, 200); // bolt to flag and turn into it
+  delay(1000);
 
   robotStop();
 }
 
 void secondAuton(int side){
-  delay(400);
-  driveDist(48, 200);
 }
 
 void safeAuton(int side){

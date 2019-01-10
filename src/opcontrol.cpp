@@ -105,7 +105,10 @@ void opcontrol() {
       lift_mtr.move_absolute(0, 100);
     }
 
-    std::cout << "Lift Pos: " << lift_mtr.get_position() << '\n';
+    std::cout << "left_back:   " << left_back.get_actual_velocity() << '\n';
+    std::cout << "left_front:  " << left_front.get_actual_velocity() << '\n';
+    std::cout << "right_back:  " << right_back.get_actual_velocity() << '\n';
+    std::cout << "right_front: " << right_front.get_actual_velocity() << '\n';
 
     delay(20);
   }
