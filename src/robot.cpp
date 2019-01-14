@@ -67,17 +67,29 @@ void driveArc(double radius, double exit_angle, int side, int max_speed){
 	arc_left *= rev;
 	arc_right *= rev;
 
-	drivePIDPos(arc_left, arc_right, max_speed);
+	double Lspeed, Rspeed;
+
+	if(arc_left > arc_right){
+		Lspeed = max_speed;
+		Rspeed = (arc_right / arc_left) * max_speed;
+	} else 	if(arc_left > arc_right){
+		Rspeed = max_speed;
+		Lspeed = (arc_left / arc_right) * max_speed;
+	}
+
+	left_back.move_relative(arc_left, Lspeed);
+	left_front.move_relative(arc_left, Lspeed);
+	right_back.move_relative(arc_right, Rspeed);
+	right_front.move_relative(arc_right, Rspeed);
 }
 
-void liftSet(char *pos){
-	int speed = 125;
+void liftSet(int pos, int speed){
 	double set;
-	if(strcmp(pos, "hold") == 0){
+	if(pos == 1){
 		set = .8;
-	} else if (strcmp(pos, "up") == 0){
+	} else if (pos == 0){
 		set = 2.5;
-	} else if (strcmp(pos, "down") == 0){
+	} else if (pos == -1){
 		set = 0;
 	}
 

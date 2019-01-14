@@ -10,50 +10,79 @@ void mainAuton(int side){
   intake(200);
 
   driveDist(38.0, 125); // to cap
-  delay(400);
-  driveDist(-35.0, 125); // back up
+  delay(250);
+  driveDist(-36.0, 125); // back up
 
-  driveTurn(90, side, 75); // turn towards flags
+  driveTurn(91, side, 80); // turn towards flags
   delay(800);
-  driveDist(-5, 120); // back up
+  driveDist(0, 140); // back up
 
-  delay(800);
+  delay(450);
   intake(0);
   index(200); // shoot
   delay(700);
-  index(0);
+  index(-1);
+  delay(20);
 
-  driveDist(28, 100); // aim for middle flag
+  intake(200); // start pushing ball into indexer
 
-  intake(200);
-  index(200); // shoot
-  delay(800);
+  driveDist(24, 100); // aim for middle flag
+
+  index(200); // 2nd shoot
+  delay(750);
 
   flyWheel(0); // stop shooting devices
   intake(0);
   index(0);
 
-  driveTurn(25, side, 100);
-  delay(600);
-  driveDist(18, 140); // turn into bottom flag and push then back up
-  driveDist(-18, 140);
+  driveTurn(12, side, 100);
+  delay(500);
+  driveDist(23, 140); // turn into bottom flag and push then back up
+  driveDist(-23, 140);
 
-  driveTurn(-135, side, 100); // turn into cap
+  driveTurn(-112, side, 100); // turn into cap
   delay(800);
 
   intake(-200);
-  driveDist(18, 100); // flip cap
-
-  driveTurn(55, side, 200);
-  delay(800);
-  driveDist(32, 200);
-  driveTurn(-100, side, 200); // bolt to flag and turn into it
-  delay(1000);
+  driveDist(25, 125); // flip cap
+  delay(500);
 
   robotStop();
 }
 
 void secondAuton(int side){
+  lift_mtr.tare_position();
+  flyWheel(200);
+  intake(200);
+  driveDist(38, 200); // to cap & drop
+  driveDist(-12, 100); // back up slightly
+
+  driveTurn(135, side, 100); // turn into cap
+  delay(1200);
+
+  driveDist(-24, 150);
+  liftSet(0, 100);  // lift cap
+  delay(700);
+
+  driveTurn(45, side, 100); // turn towards pole
+  delay(600);
+
+  driveDist(36, 150);
+  liftSet(1, 100); // place cap on pole
+  delay(1200);
+
+  driveDist(-18, 100); // back up
+  driveTurn(-90, side, 100);
+
+  driveDist(24, 100);
+  driveTurn(-45, side, 100); // turn to flags
+
+  index(200);
+  delay(300);
+  intake(200); // shoot
+  delay(3000);
+
+  robotStop();
 }
 
 void safeAuton(int side){

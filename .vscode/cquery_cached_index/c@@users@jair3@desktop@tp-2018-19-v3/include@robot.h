@@ -27,7 +27,7 @@ void driveDist(double dist, int speed);
 
 void driveTurn(int degrees, int side, int speed);
 
-void driveArc(float radius, double exit_angle, int side, int max_speed);
+void driveArc(double radius, double exit_angle, int side, int max_speed);
 
 void liftSet(int pos, int speed);
 
