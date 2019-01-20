@@ -15,9 +15,9 @@ void mainAuton(int side){
 
   driveTurn(90, side, 80); // turn towards flags
   delay(800);
-  driveDist(4, 140); // back up
+  driveDist(-6, 140); // back up
 
-  delay(450);
+  delay(650);
   intake(0);
   index(200); // shoot
   delay(700);
@@ -29,7 +29,7 @@ void mainAuton(int side){
   driveDist(24, 100); // aim for middle flag
 
   index(200); // 2nd shoot
-  delay(750);
+  delay(800);
 
   flyWheel(0); // stop shooting devices
   intake(0);
@@ -40,14 +40,13 @@ void mainAuton(int side){
   driveDist(23, 140); // turn into bottom flag and push then back up
   driveDist(-23, 140);
 
-  driveTurn(-112, side, 100); // turn into cap
+  driveTurn(-110, side, 100); // turn into cap
   delay(800);
 
   intake(-200);
-  driveDist(25, 125); // flip cap
+  driveDist(35, 125); // flip cap  END OF NORMAL AUTON
   delay(500);
-
-
+  driveDist(-10, 100);
 
   robotStop();
 }
@@ -115,7 +114,7 @@ void skills(int side){
 
   driveDist(12, 85);
 
-  driveDist(70, 150);
+  driveDist(68, 150);
 
   left_front.move_relative(0, 0);
   left_back.move_relative(0, 0);
