@@ -7,6 +7,6 @@ extern bool duo;
 
 void mainAuton(int side);
 void secondAuton(int side);
-void safeAuton(int side);
+void skills(int side);
 
 #endif

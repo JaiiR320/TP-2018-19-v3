@@ -83,9 +83,6 @@ void drivePIDPos(double Ltarget, double Rtarget, double max_speed){
 		/*~~~~~~~~~~~~~
 		SETTING OUTPUTS
 		~~~~~~~~~~~~~*/
-		if(Rspeed > 0) Rspeed -= 5;
-		if(Rspeed < 0) Rspeed += 5;
-
 		left_front.move(Lspeed);
 		left_back.move(Lspeed);
 		right_front.move(Rspeed);
@@ -103,8 +100,8 @@ void drivePIDPos(double Ltarget, double Rtarget, double max_speed){
 		//50 Hz
 		delay(25);
 	}
-	left_front.move(0);
-	left_back.move(0);
-	right_front.move(0);
-	right_back.move(0);
+	left_front.move_relative(0, 0);
+	left_back.move_relative(0, 0);
+	right_front.move_relative(0, 0);
+	right_back.move_relative(0, 0);
 }

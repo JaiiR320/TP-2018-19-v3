@@ -12,7 +12,7 @@ static lv_res_t side_sel(lv_obj_t * sideBTNS, const char *txt){
 		Aauton = 1;
 	} else if (strcmp(txt, "Second") == 0){
 		Aauton = 2;
-	}	else if(strcmp(txt, "Safe") == 0){
+	}	else if(strcmp(txt, "Skills") == 0){
 		Aauton = 3;
 	} else {
 		Aauton = 0;
@@ -47,7 +47,7 @@ static lv_res_t duo_sel(lv_obj_t * duoBTNS, const char *txt){
     return LV_RES_OK; /*Return OK because the button matrix is not deleted*/
 }
 
-static const char * btnm_side[] = {"Main", "Second", "Safe", ""};
+static const char * btnm_side[] = {"Main", "Second", "Skills", ""};
 static const char * btnm_color[] = {"Red", "Blue", ""};
 static const char * btnm_duo[] = {"Duo", "Solo", ""};
 
